@@ -18,6 +18,7 @@ namespace RoundAboutNow.Controllers
             return View();
         }
 
+
         public async Task<PartialViewResult> LocationStatus(Coordinate coordinate)
         {
             var viewModel = await WebServiceHandler.GetLocationGeneralStatusMessageAsync(coordinate);
