@@ -22,7 +22,9 @@ namespace RoundAboutNow.Api.Models.Api.SL
 
         private string CreateUrl()
         {
-            var result = $"http://api.sl.se/api2/deviations.json?key={Key}";
+
+            //TODO varför skiljer sig mängd för rawdata kontra ej raw data?
+            var result = $"http://api.sl.se/api2/deviationsrawdata.json?key={Key}";
 
             if (!String.IsNullOrEmpty(TransportMode))
             {
