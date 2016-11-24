@@ -4,6 +4,7 @@ namespace RoundAboutNow.Api.Models.Api.SL
 {
     public class SLStation
     {
+
         [JsonProperty("name")]
         public string Name { get; set; }
 
