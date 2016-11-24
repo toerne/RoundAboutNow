@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace RoundAboutNow.Api.Models
 {
-    public class WebServiceHandler
+    public static class WebServiceHandler
     {
-        public async Task<string> GetResultFromAPIAsync(string url)
+        public static async Task<string> GetResultFromAPIAsync(string url)
         {
             var client = new HttpClient();
             var json = await client.GetStringAsync(url);

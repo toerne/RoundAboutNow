@@ -26,11 +26,9 @@ namespace RoundAboutNow.Api.Controllers
         public async Task<StatusMessage> Get(string latitude, string longitude)
         {
             //TODO: metodanrop för get status logik
-            var stationsCloseBy = new SLStationsCloseBy(KeyKeeper.GetSLCloseByStationsKey(), latitude, longitude);
-            stationsCloseBy.Radius = 500;
-            var stations = await stationsCloseBy.GetSLStations();
+            var message = await StatusMessageCreator.GetGeneralStatusMessageAsync(latitude, longitude);
 
-            return (new StatusMessage { Location = "Stockholm", WarningLevel = 999, WarningMessage = stations.Count().ToString() });
+            return message;
         }
     }
 }

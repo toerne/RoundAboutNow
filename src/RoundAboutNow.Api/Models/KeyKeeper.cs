@@ -17,7 +17,7 @@ namespace RoundAboutNow.Api.Models
 
         public static string GetSLDisturbanceKey()
         {
-            return File.ReadAllLines(path + " keySLStorningar.txt")[0];
+            return File.ReadAllLines(path + "keySLStorningar.txt")[0];
         }
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RoundAboutNow.Api.Models.Api.SL
 {
-    public class SLStationsCloseBy
+    public class SLStationsCloseByApi
     {
         //API Nyckel
         public string Key { get; set; }
@@ -21,11 +21,12 @@ namespace RoundAboutNow.Api.Models.Api.SL
         //Språk sv/en, default sv
         public string Lang { get; set; }
 
-        public SLStationsCloseBy(string key, string originCoordLat, string originCoordLong)
+        public SLStationsCloseByApi(string key, string originCoordLat, string originCoordLong, int radius = 500)
         {
             Key = key;
             OriginCoordLat = originCoordLat;
             OriginCoordLong = originCoordLong;
+            Radius = radius;
         }
 
         private string CreateUrl()
@@ -49,10 +50,9 @@ namespace RoundAboutNow.Api.Models.Api.SL
         }
 
         public async Task<List<SLStation>> GetSLStations()
-        {
-            WebServiceHandler handler = new WebServiceHandler();
+        {            
             var url = CreateUrl();
-            string json = await handler.GetResultFromAPIAsync(url);
+            string json = await WebServiceHandler.GetResultFromAPIAsync(url);
 
             var wrapper = new
             {
