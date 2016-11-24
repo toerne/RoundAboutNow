@@ -16,6 +16,7 @@ namespace RoundAboutNow.Models
         {
             var url = $"{ws}{coordinate.Latitude},{coordinate.Longitude}";
             var client = new HttpClient();
+
             var json = await client.GetStringAsync(url);
             var statusMessage = JsonConvert.DeserializeObject<StatusMessage>(json);
 
