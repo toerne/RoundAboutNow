@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+</head>
+<body>
+    <div class="navbar row">
+        <center>
+            <div class="col-sm-4"></div>
+            <div class="col-sm-4">
+
+                <img id="logoimage" src="~/Images/roundaboutnow_logo_large.png" />
+
+            </div>
+            <div class="col-sm-2">Hem</div>
+            <div class="col-sm-2">Om</div>
+        </center>
+    </div>
+
+    <div>
+        @RenderBody()
+    </div>
+
+    <footer class="footer">
+        Copyright RoundAboutNow 2016
+    </footer>
+    <link rel="icon" type="image/x-icon" href="@Url.Content("~/Images/favicon.png")" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="~/Css/StyleSheet.css" rel="stylesheet" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    @{ RenderSection("scripts", required: false);}
+</body>
+</html>
