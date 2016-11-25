@@ -20,7 +20,12 @@ namespace RoundAboutNow.Models
             var json = await client.GetStringAsync(url);
             var statusMessage = JsonConvert.DeserializeObject<StatusMessage>(json);
 
-            var viewModel = new LocationStatusVM { WarningMessage = statusMessage.WarningMessage, Header = $"Stad: {statusMessage.Location}" };
+            var viewModel = new LocationStatusVM
+            {
+                WarningMessage = statusMessage.WarningMessage,
+                Header = statusMessage.Location,
+                WarningLevel = statusMessage.WarningLevel
+            };
 
             return viewModel;
         }

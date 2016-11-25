@@ -1,9 +1,12 @@
 ﻿@{ViewBag.Title = "Location Status";}
 
-<div id="locationstatusdiv">
-    
-</div>
-
+<center>
+    <div id="locationstatusdiv">
+        <i class="fa fa-spinner fa-pulse fa-5x fa-fw" style="color:green"></i>
+        <span class="sr-only">Loading...</span>
+    </div>
+</center>
 @section scripts{
+    
     <script src="~/Scripts/GeoLocation.js"></script>
 }

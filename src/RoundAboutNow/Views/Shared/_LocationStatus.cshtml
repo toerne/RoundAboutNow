@@ -2,7 +2,31 @@
 
 <div>
     <h1>
-        @Model.Header
+        Trafikläget i @Model.Header
     </h1>
-    @Model.WarningMessage
+</div>
+<div>
+    <h3>
+        @switch (Model.WarningLevel)
+        {
+            case 1:
+                <i class="fa fa-smile-o fa-5x" aria-hidden="true" style="color:green"></i><br />
+                <text>Inga problem</text>
+                break;
+            case 2:
+                <i class="fa fa-meh-o fa-5x" aria-hidden="true" style="color:orange"></i><br />
+                <text>Några problem</text>
+                break;
+            case 3:
+                <i class="fa fa-frown-o fa-5x" aria-hidden="true" style="color:red"></i><br />
+                <text>Massor med problem</text>
+                break;
+
+        }
+    </h3>
+    <br />
+    <div>
+        <p>@Model.WarningMessage</p>
+    </div>
+
 </div>

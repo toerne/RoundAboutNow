@@ -14,7 +14,7 @@ namespace RoundAboutNow.Api.Models
             var statusMessage = new StatusMessage();
 
             //TODO: Hämta location från separat API
-            statusMessage.Location = "Stockholm";
+            statusMessage.Location = "Stockholm";            
             statusMessage.WarningMessage = "";
 
             var stationsCloseBy = new SLStationsCloseByApi(KeyKeeper.GetSLCloseByStationsKey(), latitude, longitude);
@@ -39,40 +39,16 @@ namespace RoundAboutNow.Api.Models
                 }
                 catch (Exception ex)
                 {
-
                     throw ex;
                 }
             }
 
             Task.WaitAll(taskList.ToArray());
 
-            double stationsWithDisturbances = stations.Where(s => s.Disturbances.Count > 0).Count();
-            double percentage = stationsWithDisturbances / stations.Count();
-            statusMessage.WarningMessage = "Percentage: " + percentage + "%. Stationer med problem: " + stationsWithDisturbances + ". Totalt antal stationer: " + stations.Count();
-
-
-            /*
-            if (stations.Count > 0)
-            {
-                string siteIDs = "";
-
-                for (int i = 0; i < stations.Count; i++)
-                {
-                    siteIDs += stations[i].Id.ToString().Substring(stations[i].Id.ToString().Length - 4, 4);
-                    if (i != stations.Count)
-                        siteIDs += ",";
-                }
-
-                var disturbances = new SLDisturbancesApi(KeyKeeper.GetSLDisturbanceKey());
-                disturbances.SiteID = siteIDs;
-
-                var slDisturbances = await disturbances.GetSLDisturbances();
-
-                //Testingpurposes
-                statusMessage.WarningMessage = slDisturbances.Count().ToString();
-            }*/
-
-            // TODO: Disturbances by stations
+            var warningInformation = new WarningInformation();
+            warningInformation.SLStations = stations;
+            warningInformation.AppendWarningInformation(statusMessage);
+            
             return statusMessage;
         }
     }
