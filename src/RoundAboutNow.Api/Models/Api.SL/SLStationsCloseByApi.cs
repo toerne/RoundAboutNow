@@ -52,7 +52,8 @@ namespace RoundAboutNow.Api.Models.Api.SL
         public async Task<List<SLStation>> GetSLStations()
         {            
             var url = CreateUrl();
-            string json = await WebServiceHandler.GetResultFromAPIAsync(url);
+            var handler = new WebServiceHandler();
+            string json = await handler.GetResultFromAPIAsync(url);
 
             var wrapper = new
             {

@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace RoundAboutNow.Api.Models.Api.SL
 {
@@ -19,5 +20,6 @@ namespace RoundAboutNow.Api.Models.Api.SL
 
         [JsonProperty("dist")]
         public int Distance { get; set; }
+        public List<SLDisturbance> Disturbances { get; set; }
     }
 }
