@@ -24,7 +24,8 @@ namespace RoundAboutNow.Models
             {
                 WarningMessage = statusMessage.WarningMessage,
                 Header = statusMessage.Location,
-                WarningLevel = statusMessage.WarningLevel
+                WarningLevel = statusMessage.WarningLevel,
+                Stations = statusMessage.Stations
             };
 
             return viewModel;

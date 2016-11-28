@@ -6,6 +6,12 @@
     color:orange;
 }
 
+#ServerErrorIcon,
 #MuchProblemIcon {
     color:red;
+}
+
+#googlemap{   
+    height: 450px;
+    width: 100%;
 }

@@ -14,7 +14,6 @@ namespace RoundAboutNow.Api.Models
             var statusMessage = new StatusMessage();
 
             //TODO: Hämta location från separat API
-            statusMessage.Location = "Stockholm";            
             statusMessage.WarningMessage = "";
 
             var stationsCloseBy = new SLStationsCloseByApi(KeyKeeper.GetSLCloseByStationsKey(), latitude, longitude);
@@ -48,7 +47,7 @@ namespace RoundAboutNow.Api.Models
             var warningInformation = new WarningInformation();
             warningInformation.SLStations = stations;
             warningInformation.AppendWarningInformation(statusMessage);
-            
+
             return statusMessage;
         }
     }

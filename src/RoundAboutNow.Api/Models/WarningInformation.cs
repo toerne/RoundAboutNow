@@ -30,10 +30,7 @@ namespace RoundAboutNow.Api.Models
                 warningLevel = 3;
             }
 
-            if (warningLevel != 1)
-            {
-                warningMessage += Math.Round(percentage * 100, 2) + "% av hållplatserna rapporterar störningar";
-            }
+            warningMessage += $"{SLStations.Where(s => s.Disturbances.Count > 0).Count()} av {SLStations.Count} ({Math.Round(percentage * 100, 0)}%) hållplatser rapporterar störningar";
         }
 
         public void AppendWarningInformation(StatusMessage message)
@@ -41,6 +38,15 @@ namespace RoundAboutNow.Api.Models
             CreateWarning();
             message.WarningLevel = warningLevel;
             message.WarningMessage = warningMessage;
+            foreach (var station in SLStations)
+            {
+                message.Stations.Add(new StationCoordinate
+                {
+                    Latitude = station.Latitude,
+                    Longitude = station.Longitude,
+                    StatusLevel = station.Disturbances.Count() > 0 ? 1 : 0
+                });
+            }
         }
 
         private double CalculatePercentageOfDisturbedStation()

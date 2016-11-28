@@ -15,7 +15,7 @@ namespace RoundAboutNow.Api.Models.Api.SL
         //Longitud
         public string OriginCoordLong { get; set; }
         //MaxResults
-        public int MaxResults { get; set; }
+        public int MaxResults { get; set; } = 1000;
         //Radie i meter
         public int Radius { get; set; }
         //Språk sv/en, default sv

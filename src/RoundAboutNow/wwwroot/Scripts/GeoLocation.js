@@ -1,4 +1,6 @@
-﻿new function main() {
+﻿
+
+new function main() {
 
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(showPosition, showError);
@@ -9,9 +11,10 @@
 
 function showPosition(position) {
     var url = "LocationStatus";
+
     var param = { Latitude: position.coords.latitude, Longitude: position.coords.longitude };
-    
-    console.log(position.coords.latitude, position.coords.longitude)
+         
+    //console.log(position.coords.latitude, position.coords.longitude)
     $.post(url, param, function (res) {
         $("#locationstatusdiv").html(res);
     })
@@ -33,3 +36,4 @@ function showError(error) {
             break;
     }
 }
+

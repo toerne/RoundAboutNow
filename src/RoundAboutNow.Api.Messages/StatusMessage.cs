@@ -10,5 +10,6 @@ namespace RoundAboutNow.Api.Messages
         public int WarningLevel { get; set; }
         public string WarningMessage { get; set; }
         public string Location { get; set; }
+        public List<StationCoordinate> Stations { get; set; } = new List<StationCoordinate>();
     }
 }

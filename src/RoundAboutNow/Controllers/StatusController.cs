@@ -21,8 +21,17 @@ namespace RoundAboutNow.Controllers
 
         public async Task<PartialViewResult> LocationStatus(Coordinate coordinate)
         {
-            var viewModel = await WebServiceHandler.GetLocationGeneralStatusMessageAsync(coordinate);
-            return PartialView("_LocationStatus", viewModel);
+            try
+            {
+                var viewModel = await WebServiceHandler.GetLocationGeneralStatusMessageAsync(coordinate);
+                return PartialView("_LocationStatus", viewModel);
+
+            }
+            catch (Exception ex)
+            {
+                var viewModel = new LocationStatusVM { WarningLevel = -1, WarningMessage = ex.Message, Header = "*Error*"};
+                return PartialView("_LocationStatus", viewModel);
+            }
         }
     }
 }
