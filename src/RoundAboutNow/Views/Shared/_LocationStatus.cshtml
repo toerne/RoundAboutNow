@@ -6,27 +6,25 @@
     </h1>
 </div>
 <div>
-    <h3>
-        @switch (Model.WarningLevel)
-        {
-            case 1:
-                <i class="fa fa-smile-o fa-5x" aria-hidden="true" style="color:green"></i><br />
-                <text>Inga problem</text>
-                break;
-            case 2:
-                <i class="fa fa-meh-o fa-5x" aria-hidden="true" style="color:orange"></i><br />
-                <text>Några problem</text>
-                break;
-            case 3:
-                <i class="fa fa-frown-o fa-5x" aria-hidden="true" style="color:red"></i><br />
-                <text>Massor med problem</text>
-                break;
+    @switch (Model.WarningLevel)
+    {
+        case 1:
+            <h3><i class="fa fa-smile-o fa-5x" id="NoProblemIcon" aria-hidden="true"></i></h3><br />
+            <p>Inga problem</p>
+            break;
+        case 2:
+            <h3><i class="fa fa-meh-o fa-5x" id="SomeProblemIcon" aria-hidden="true"></i></h3><br />
+            <p>Några problem</p>
+            break;
+        case 3:
+            <h3><i class="fa fa-frown-o fa-5x" id="MuchProblemIcon" aria-hidden="true"></i></h3><br />
+            <p>Massor med problem</p>
+            break;
 
-        }
-    </h3>
+    }
     <br />
     <div>
-        <p>@Model.WarningMessage</p>
+<p>@Model.WarningMessage</p>
     </div>
 
 </div>

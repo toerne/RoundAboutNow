@@ -1,0 +1,11 @@
+﻿#NoProblemIcon {
+    color:green;
+}
+
+#SomeProblemIcon {
+    color:orange;
+}
+
+#MuchProblemIcon {
+    color:red;
+}
