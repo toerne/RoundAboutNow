@@ -12,7 +12,23 @@
 }
 
 #googlemap{   
-    height: 450px;
+    height: 400px;
     width: 100%;
     max-width: 1100px;
+}
+
+
+
+#locationstatusdiv {
+    height: 150px;
+    display: table;
+}
+
+#locationstatusdiv > div {
+    vertical-align: middle;
+    display: table-cell;
+}
+
+.inactive-smiley {
+    color: lightgray;
 }
