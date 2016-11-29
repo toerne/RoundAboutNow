@@ -53,3 +53,10 @@ body {
     background-color: #f8f8f8;
     box-shadow: 0 9px 9px 12px gray;
 }
+
+hr {
+    border-bottom: gray 1px solid;
+    max-width: 1120px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}

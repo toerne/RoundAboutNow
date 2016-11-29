@@ -13,5 +13,6 @@ namespace RoundAboutNow.Api.Models.Api.SL
         [JsonProperty("UpToDateTime")]
         public string EndDate { get; set; }
         public string Updated { get; set; }
+        public string DevCaseGid { get; set; }
     }
 }

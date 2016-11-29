@@ -15,11 +15,93 @@
         case 3:
             <i class="fa fa-smile-o fa-5x inactive-smiley" aria-hidden="true"></i><i class="fa fa-meh-o fa-5x inactive-smiley" aria-hidden="true"></i><i class="fa fa-frown-o fa-5x" id="MuchProblemIcon" aria-hidden="true"></i>
             break;
-    }    
+    }
     <div>
         <p>@Model.WarningMessage</p>
     </div>
 </div>
+
+
+@*append to div #carousel in view*@
+<div id="text-carousel" class="carousel slide" data-ride="carousel">
+    <!-- Wrapper for slides -->
+    <div class="row">
+        <div class="col-xs-offset-3 col-xs-6 carousel-box">
+            <div class="carousel-inner">
+                @foreach (var station in Model.Stations)
+                {
+                    string isFirstSlide = "";
+                    if (Model.Stations.First() == station)
+                    {
+                        isFirstSlide = "active";
+                    }
+                    <div class="item @isFirstSlide">
+                        <div class="carousel-content verticalscroll">
+                            <center><h3>@station.Name</h3></center>
+                            <br />
+
+                            @if (station.Disturbances.Count() > 0)
+                            {
+                                @foreach (var disturbance in station.Disturbances)
+                                {
+                                    <div class="carousel-text-problems">
+                                        <b>@disturbance.Header</b>
+                                        <p>@disturbance.Details</p>
+                                    </div>
+                                        <br />
+                                }
+                            }
+                            else
+                            {
+                                <div class="carousel-text-noproblems">
+                                    <p>Inga störningar på denna hållplats</p>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                }
+                @*<div class="item active">
+                        <div class="carousel-content verticalscroll">
+                            <div>
+                                <p>Sapiente, ducimus, voluptas, mollitia voluptatibus nemo explicabo sit blanditiis laborum dolore illum fuga veniam quae expedita libero accusamus quas harum ex numquam necessitatibus provident deleniti tenetur iusto officiis recusandae corporis culpa quaerat?</p><p>Sapiente, ducimus, voluptas, mollitia voluptatibus nemo explicabo sit blanditiis laborum dolore illum fuga veniam quae expedita libero accusamus quas harum ex numquam necessitatibus provident deleniti tenetur iusto officiis recusandae corporis culpa quaerat?</p><p>Sapiente, ducimus, voluptas, mollitia voluptatibus nemo explicabo sit blanditiis laborum dolore illum fuga veniam quae expedita libero accusamus quas harum ex numquam necessitatibus provident deleniti tenetur iusto officiis recusandae corporis culpa quaerat?</p><p>Sapiente, ducimus, voluptas, mollitia voluptatibus nemo explicabo sit blanditiis laborum dolore illum fuga veniam quae expedita libero accusamus quas harum ex numquam necessitatibus provident deleniti tenetur iusto officiis recusandae corporis culpa quaerat?</p><p>Sapiente, ducimus, voluptas, mollitia voluptatibus nemo explicabo sit blanditiis laborum dolore illum fuga veniam quae expedita libero accusamus quas harum ex numquam necessitatibus provident deleniti tenetur iusto officiis recusandae corporis culpa quaerat?</p><p>Sapiente, ducimus, voluptas, mollitia voluptatibus nemo explicabo sit blanditiis laborum dolore illum fuga veniam quae expedita libero accusamus quas harum ex numquam necessitatibus provident deleniti tenetur iusto officiis recusandae corporis culpa quaerat?</p><p>Sapiente, ducimus, voluptas, mollitia voluptatibus nemo explicabo sit blanditiis laborum dolore illum fuga veniam quae expedita libero accusamus quas harum ex numquam necessitatibus provident deleniti tenetur iusto officiis recusandae corporis culpa quaerat?</p><p>Sapiente, ducimus, voluptas, mollitia voluptatibus nemo explicabo sit blanditiis laborum dolore illum fuga veniam quae expedita libero accusamus quas harum ex numquam necessitatibus provident deleniti tenetur iusto officiis recusandae corporis culpa quaerat?</p><p>Sapiente, ducimus, voluptas, mollitia voluptatibus nemo explicabo sit blanditiis laborum dolore illum fuga veniam quae expedita libero accusamus quas harum ex numquam necessitatibus provident deleniti tenetur iusto officiis recusandae corporis culpa quaerat?</p><p>Sapiente, ducimus, voluptas, mollitia voluptatibus nemo explicabo sit blanditiis laborum dolore illum fuga veniam quae expedita libero accusamus quas harum ex numquam necessitatibus provident deleniti tenetur iusto officiis recusandae corporis culpa quaerat?</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="carousel-content">
+                            <div>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi, sint fuga temporibus nam saepe delectus expedita vitae magnam necessitatibus dolores tempore consequatur dicta cumque repellendus eligendi ducimus placeat! </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="carousel-content">
+                            <div>
+                                <p>Sapiente, ducimus, voluptas, mollitia voluptatibus nemo explicabo sit blanditiis laborum dolore illum fuga veniam quae expedita libero accusamus quas harum ex numquam necessitatibus provident deleniti tenetur iusto officiis recusandae corporis culpa quaerat?</p>
+                            </div>
+                        </div>
+                    </div>*@
+
+            </div>
+        </div>
+    </div>
+    <a class="left carousel-control" href="#text-carousel" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left"></span>
+    </a>
+    <a class="right carousel-control" href="#text-carousel" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right"></span>
+    </a>
+
+</div>
+
+
+
+<script>
+    $("#text-carousel").appendTo('#disturbancecarousel');
+    $('.carousel').carousel({
+        interval: false
+    });
+</script>
 
 @foreach (var station in Model.Stations)
 {
@@ -29,10 +111,12 @@
         var imageUrl;
         @if (station.StatusLevel == 0)
         {
+            //fixa bildlänkarna (relativa sökvägar)
             <text>imageUrl = "http://localhost:22416/images/stationok.png";</text>
         }
         else
         {
+            //fixa bildlänkarna(relativa sökvägar)
             <text>imageUrl = "http://localhost:22416/images/stationwarning.png";</text>
         }
 
@@ -48,9 +132,9 @@
             position: markerpos,
             map: map,
             //fixa encoding åäöüæ
-            title: "@station.Name",  
+            title: "@station.Name",
             animation: google.maps.Animation.DROP,
             icon: image
-            });
+        });
     </script>
 }
