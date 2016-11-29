@@ -23,7 +23,6 @@ namespace RoundAboutNow.Models
             var viewModel = new LocationStatusVM
             {
                 WarningMessage = statusMessage.WarningMessage,
-                Header = statusMessage.Location,
                 WarningLevel = statusMessage.WarningLevel,
                 Stations = statusMessage.Stations
             };

@@ -14,7 +14,6 @@ function showPosition(position) {
 
     var param = { Latitude: position.coords.latitude, Longitude: position.coords.longitude };
          
-    //console.log(position.coords.latitude, position.coords.longitude)
     $.post(url, param, function (res) {
         $("#locationstatusdiv").html(res);
     })

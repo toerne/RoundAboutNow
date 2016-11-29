@@ -1,7 +1,6 @@
 ﻿var map;
 
 function initMap() {
-    //TODO bygg om 
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(showGoogleMap, showError);
     } else {
@@ -19,7 +18,6 @@ function showGoogleMap(position) {
         center: uluru
     });
 
-
     var imageUrl = "http://localhost:22416/images/youarehere.png";
 
     var image = {
@@ -34,7 +32,6 @@ function showGoogleMap(position) {
         map: map,
         title: "Nuvarande position",
         animation: google.maps.Animation.DROP,
-        //H för hållplats, icon för person
         icon: image
     });
 
@@ -49,16 +46,11 @@ function showGoogleMap(position) {
         radius: 500
     });
 
-
-
     function geocodeLatLng(geocoder, uluru) {
 
         geocoder.geocode({ 'location': uluru }, function (results, status) {
             if (status === 'OK') {
-                console.log(results);
-
                 var areaName;
-
                 for (var i = 0; i < results.length; i++) {
                     areaName = results[i].formatted_address;
                     var breakloop = false;
@@ -70,28 +62,11 @@ function showGoogleMap(position) {
                     }
                     if (breakloop) {
                         $("#areaTitle").text("Status för " + areaName.split(",")[0]);
-                        console.log(areaName.split(",")[0]);
                         break;
                     }
                 }
-                //$(results).each(function (index) {
-                //    areaName = this.formatted_address;
-                    
-                //    var breakloop = false;
-
-                //    $(this.types).each(function (index2) {
-                //        if (this === "neighborhood") {
-                //            breakloop = true;
-                //            return false;
-                //        }
-                //    });
-                //    if (breakloop === true)
-                //        return false;
-                //    console.log(index + ": " + this.formatted_address);
-                //});
-                //TODO: getelementbyid text = areaName
             } else {
-                console.log('Geocoder failed due to: ' + status);
+                $("#areaTitle").text("Kunde ej hitta område");
             }
         });
     }

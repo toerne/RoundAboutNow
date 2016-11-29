@@ -40,12 +40,20 @@ namespace RoundAboutNow.Api.Models
             message.WarningMessage = warningMessage;
             foreach (var station in SLStations)
             {
-                message.Stations.Add(new StationCoordinate
+                var newStation = new Station
                 {
                     Latitude = station.Latitude,
                     Longitude = station.Longitude,
-                    StatusLevel = station.Disturbances.Count() > 0 ? 1 : 0
-                });
+                    StatusLevel = station.Disturbances.Count() > 0 ? 1 : 0,
+                    Name = station.Name
+                };
+
+                foreach (var disturbance in station.Disturbances)
+                {
+                    newStation.Disturbances.Add(new Disturbance { Header = disturbance.Header, Details = disturbance.Details });
+                }
+
+                message.Stations.Add(newStation);
             }
         }
 
