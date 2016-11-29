@@ -60,27 +60,45 @@ div.carousel-box {
 
 
 
-.verticalscroll::-webkit-scrollbar-track
-{
-	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-	background-color: #F5F5F5;
-}
-.verticalscroll::-webkit-scrollbar
-{
-	width: 6px;
-	background-color: #F5F5F5;
+.verticalscroll::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    background-color: #F5F5F5;
 }
 
-.verticalscroll::-webkit-scrollbar-thumb
-{
-	background-color: #000000;
+.verticalscroll::-webkit-scrollbar {
+    width: 6px;
+    background-color: #F5F5F5;
+}
+
+.verticalscroll::-webkit-scrollbar-thumb {
+    background-color: #000000;
 }
 
 
 .carousel-control {
-    border: gray 2px outset;
+    border: gray 3px outset;
+    border-radius: 16px;
 }
 
-.carousel-text-problems{
-    text-align:left;
+.carousel-text-problems {
+    text-align: left;
+    background: rgba(255, 247, 0, 0.35);
+    border: 1px solid #723f01;
+    padding: 5px 10px 0px 10px;
+    margin: 0px 20px 0px 20px;
+    color: black;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px 1px gray;
+}
+
+.carousel-text-noproblems {
+    text-align: center;
+    max-width: 300px;
+    background: rgba(0, 161, 5, 0.49);
+    border: 1px solid #723f01;
+    padding: 10px 10px 0px 10px;
+    margin: 0px 20px 0px 20px;
+    color: black;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px 1px gray;
 }

@@ -18,8 +18,6 @@ function showGoogleMap(position) {
         center: uluru
     });
 
-
-
     var imageUrl = "http://localhost:22416/images/youarehere.png";
 
     var image = {
@@ -50,6 +48,10 @@ function showGoogleMap(position) {
 
     addreziselistner();
 
+    //visa trafikering
+    var trafficLayer = new google.maps.TrafficLayer();
+    trafficLayer.setMap(map);
+
     function geocodeLatLng(geocoder, uluru) {
 
         geocoder.geocode({ 'location': uluru }, function (results, status) {
@@ -78,7 +80,6 @@ function showGoogleMap(position) {
 
 
 function addreziselistner() {
-    //google.maps.event.addDomListener(window, 'load', initialize);
     google.maps.event.addDomListener(window, "resize", function () {
         var center = map.getCenter();
         google.maps.event.trigger(map, "resize");
