@@ -88,7 +88,6 @@ namespace RoundAboutNow.Api.Models.Api.SL
                     if(deserializedSingleStationResult.LocationList.StopLocation != null)
                         result.Add(deserializedSingleStationResult.LocationList.StopLocation);
                 }
-
             }
             catch (Exception)
             {

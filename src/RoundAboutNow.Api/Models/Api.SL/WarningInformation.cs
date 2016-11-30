@@ -32,8 +32,7 @@ namespace RoundAboutNow.Api.Models.Api.SL
                 warningLevel = 3;
             }
             disturbanceWarningMessage += $"{SLStations.Where(s => s.Disturbances.Count > 0).Count()} av {SLStations.Count} ({Math.Round(percentage * 100, 0)}%) hållplatser rapporterar störningar";
-
-
+            
             if (warningLevel < SmhiWarning.WarningClass)
             {
                 warningLevel = SmhiWarning.WarningClass;
@@ -41,7 +40,6 @@ namespace RoundAboutNow.Api.Models.Api.SL
 
             if (SmhiWarning.WarningClass > 0)
                 weatherWarningMessage += $"\nVäder: {SmhiWarning.WeatherWarningMessage}";
-
 
         }
 

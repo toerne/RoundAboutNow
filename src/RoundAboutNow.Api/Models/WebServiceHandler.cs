@@ -15,6 +15,5 @@ namespace RoundAboutNow.Api.Models
             var json = await client.GetStringAsync(url);
             return json;
         }
-
     }
 }

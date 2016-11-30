@@ -36,8 +36,6 @@ namespace RoundAboutNow.Api.Controllers
                 throw ex;
             }
             //TODO: metodanrop för get status logik
-
-
         }
     }
 }

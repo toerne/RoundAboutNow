@@ -16,7 +16,6 @@ namespace RoundAboutNow.Api.Models.Api.SMHI
 
         static SMHIDistrictHandler()
         {
-
             JsonAnswerDistricts = File.ReadAllLines("SMHIDistrictsAnswer.txt")[0];
 
             DistrictList = new List<SMHIDistrict>();
@@ -46,7 +45,6 @@ namespace RoundAboutNow.Api.Models.Api.SMHI
                     });
                 }
             }
-
         }
     }
 }

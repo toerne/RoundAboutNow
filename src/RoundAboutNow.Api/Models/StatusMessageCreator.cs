@@ -12,15 +12,11 @@ namespace RoundAboutNow.Api.Models
     {
         private static WarningInformation warningInformation;
 
-
-
         public static async Task<StatusMessage> GetGeneralStatusMessageAsync(string latitude, string longitude)
         {
             StatusMessage statusMessage = new StatusMessage();
             warningInformation = new WarningInformation();
-
-
-            //TODO: Hämta location från separat API
+            
             statusMessage.DisturbanceWarningMessage = "";
             warningInformation = await AddWeatherWarningStatusMessageAsync(latitude, longitude, warningInformation);
             warningInformation = await AddDisturbanceStatusMessageAsync(latitude, longitude, warningInformation);
@@ -64,11 +60,8 @@ namespace RoundAboutNow.Api.Models
             {
                 if (stations.Count > 1)
                 {
-
-
                     foreach (var station in stations)
                     {
-
                         var newtask = new Task(() =>
                         {
                             var disturbancesApi = new SLDisturbancesApi(KeyKeeper.GetSLDisturbanceKey());
@@ -96,7 +89,6 @@ namespace RoundAboutNow.Api.Models
             }
 
             Task.WaitAll(taskList.ToArray());
-
 
             warningInfo.SLStations = stations;
 

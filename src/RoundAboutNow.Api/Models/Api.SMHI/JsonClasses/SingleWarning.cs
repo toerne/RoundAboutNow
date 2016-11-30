@@ -9,8 +9,6 @@ namespace RoundAboutNow.Api.Models.Api.SMHI
     public class SingleWarning
     {
         [JsonProperty("info")]
-        public Info info { get; set; }
-
-
+        public Info info { get; set; }        
     }
 }
