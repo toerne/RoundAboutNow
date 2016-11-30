@@ -21,10 +21,8 @@
     </div>
 </div>
 
-
 @*append to div #carousel in view*@
 <div id="text-carousel" class="carousel slide" data-ride="carousel">
-    <!-- Wrapper for slides -->
     <div class="row">
         <div class="col-xs-offset-3 col-xs-6 carousel-box">
             <div class="carousel-inner">
@@ -39,7 +37,6 @@
                         <div class="carousel-content verticalscroll">
                             <center><h3><b>@station.Name</b></h3></center>
                             <br />
-
                             @if (station.Disturbances.Count() > 0)
                             {
                                 @foreach (var disturbance in station.Disturbances)
@@ -48,7 +45,7 @@
                                         <b>@disturbance.Header</b>
                                         <p>@disturbance.Details</p>
                                     </div>
-                                        <br />
+                                    <br />
                                 }
                             }
                             else
@@ -69,10 +66,7 @@
     <a class="right carousel-control" href="#text-carousel" data-slide="next">
         <span class="glyphicon glyphicon-chevron-right"></span>
     </a>
-
 </div>
-
-
 
 <script>
     $("#text-carousel").appendTo('#disturbancecarousel');
