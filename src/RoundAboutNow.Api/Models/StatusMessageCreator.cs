@@ -1,5 +1,6 @@
 ﻿using RoundAboutNow.Api.Messages;
 using RoundAboutNow.Api.Models.Api.SL;
+using RoundAboutNow.Api.Models.Api.SMHI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,13 +10,52 @@ namespace RoundAboutNow.Api.Models
 {
     public static class StatusMessageCreator
     {
+        private static WarningInformation warningInformation;
+        
+
+
         public static async Task<StatusMessage> GetGeneralStatusMessageAsync(string latitude, string longitude)
         {
-            var statusMessage = new StatusMessage();
+            StatusMessage statusMessage = new StatusMessage();
+            warningInformation = new WarningInformation();
+
 
             //TODO: Hämta location från separat API
             statusMessage.WarningMessage = "";
+            warningInformation = await AddWeatherWarningStatusMessageAsync(latitude, longitude, warningInformation);
+            warningInformation = await AddDisturbanceStatusMessageAsync(latitude, longitude, warningInformation);
 
+            warningInformation.AppendWarningInformation(statusMessage);
+
+            return statusMessage;
+        }
+
+        private async static Task<WarningInformation> AddWeatherWarningStatusMessageAsync(string latitude, string longitude, WarningInformation warningInfo)
+        {
+            try
+            {
+                var smhiWarningsApi = new SMHIWarningsApi();
+
+                // Get district number by comparison to JSON-district answer from SMHI, apply that cool algorithm we thought of.
+                // Check in JSON-alert answer from SMHI if there is a warning for this district
+
+                SMHIWarning smhiWarning = await smhiWarningsApi.GetWarningsAsync(latitude, longitude);
+
+                // Change warning-Level in Status-Message, Append WarningMessage
+                warningInfo.SmhiWarning = smhiWarning;
+
+                return warningInfo;
+            }
+            catch (Exception ex)
+            {
+                var exception = ex.Message;
+            }
+
+            return warningInfo;
+        }
+
+        private static async Task<WarningInformation> AddDisturbanceStatusMessageAsync(string latitude, string longitude, WarningInformation warningInfo)
+        {
             var stationsCloseBy = new SLStationsCloseByApi(KeyKeeper.GetSLCloseByStationsKey(), latitude, longitude);
             var stations = await stationsCloseBy.GetSLStations();
 
@@ -44,11 +84,10 @@ namespace RoundAboutNow.Api.Models
 
             Task.WaitAll(taskList.ToArray());
 
-            var warningInformation = new WarningInformation();
-            warningInformation.SLStations = stations;
-            warningInformation.AppendWarningInformation(statusMessage);
+            
+            warningInfo.SLStations = stations;
 
-            return statusMessage;
+            return warningInfo;
         }
     }
 }

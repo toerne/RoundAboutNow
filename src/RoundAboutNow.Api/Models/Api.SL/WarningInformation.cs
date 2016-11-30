@@ -4,15 +4,16 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using RoundAboutNow.Api.Models.Api.SMHI;
 
-namespace RoundAboutNow.Api.Models
+namespace RoundAboutNow.Api.Models.Api.SL
 {
     public class WarningInformation
     {
         private string warningMessage = "";
         private int warningLevel = 1;
         public List<SLStation> SLStations { get; set; } = new List<SLStation>();
-
+        public SMHIWarning SmhiWarning { get; set; }
 
         private void CreateWarning()
         {
@@ -29,15 +30,25 @@ namespace RoundAboutNow.Api.Models
             {
                 warningLevel = 3;
             }
-
             warningMessage += $"{SLStations.Where(s => s.Disturbances.Count > 0).Count()} av {SLStations.Count} ({Math.Round(percentage * 100, 0)}%) hållplatser rapporterar störningar";
+
+
+            if (warningLevel < SmhiWarning.WarningClass)
+            {
+                warningLevel = SmhiWarning.WarningClass;
+            }
+
+            if (SmhiWarning.WarningClass > 0)
+                warningMessage += $"\nVäder: {SmhiWarning.WeatherWarningMessage}";
+
+
         }
 
         public void AppendWarningInformation(StatusMessage message)
         {
             CreateWarning();
             message.WarningLevel = warningLevel;
-            message.WarningMessage = warningMessage;
+            message.WarningMessage += warningMessage;
             foreach (var station in SLStations)
             {
                 var newStation = new Station
