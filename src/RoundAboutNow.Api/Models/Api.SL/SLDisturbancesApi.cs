@@ -48,19 +48,27 @@ namespace RoundAboutNow.Api.Models.Api.SL
 
         public async Task<List<SLDisturbance>> GetSLDisturbances()
         {
+            var result = new List<SLDisturbance>();
             var url = CreateUrl();
             var handler = new WebServiceHandler();
 
             string json = await handler.GetResultFromAPIAsync(url);
 
-            var wrapper = new
+            try
             {
-                ResponseData = new List <SLDisturbance>()
+                var wrapper = new
+                {
+                    ResponseData = new List<SLDisturbance>()
+                };
+                var deserializedResult = JsonConvert.DeserializeAnonymousType(json, wrapper);
+                result = deserializedResult.ResponseData;
+            }
+            catch (Exception)
+            {
+                //POKÉMON!
+            }
 
-            };
-
-            var result = JsonConvert.DeserializeAnonymousType(json, wrapper);
-            return result.ResponseData;
+            return result;
         }
     }
 }

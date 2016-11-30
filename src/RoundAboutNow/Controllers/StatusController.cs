@@ -29,7 +29,7 @@ namespace RoundAboutNow.Controllers
             }
             catch (Exception ex)
             {
-                var viewModel = new LocationStatusVM { WarningLevel = -1, WarningMessage = ex.Message, Header = "*Error*"};
+                var viewModel = new LocationStatusVM { WarningLevel = -1, DisturbanceWarningMessage = ex.Message, Header = "*Error*", WeatherWarningMessage = "Error weather!"};
                 return PartialView("_LocationStatus", viewModel);
             }
         }

@@ -53,19 +53,49 @@ namespace RoundAboutNow.Api.Models.Api.SL
         {            
             var url = CreateUrl();
             var handler = new WebServiceHandler();
-            string json = await handler.GetResultFromAPIAsync(url);
+            string json = await handler.GetResultFromAPIAsync(url);            
 
-            var wrapper = new
+            List<SLStation> result = new List<SLStation>();
+
+            try
             {
-                LocationList = new
+                var wrapper = new
                 {
-                    StopLocation = new List<SLStation>()
-                }
-            };
+                    LocationList = new
+                    {
+                        StopLocation = new List<SLStation>()
+                    }
+                };
 
-            var result = JsonConvert.DeserializeAnonymousType(json, wrapper);
-            return result.LocationList.StopLocation;
-             
+                var deserializedResult = JsonConvert.DeserializeAnonymousType(json, wrapper);
+
+                if (deserializedResult.LocationList.StopLocation != null)
+                {
+                    result = deserializedResult.LocationList.StopLocation;
+                }
+                else
+                {
+                    var wrapperSingleStation = new
+                    {
+                        LocationList = new
+                        {
+                            StopLocation = new SLStation()
+                        }
+                    };
+
+                    var deserializedSingleStationResult = JsonConvert.DeserializeAnonymousType(json, wrapperSingleStation);
+                    
+                    if(deserializedSingleStationResult.LocationList.StopLocation != null)
+                        result.Add(deserializedSingleStationResult.LocationList.StopLocation);
+                }
+
+            }
+            catch (Exception)
+            {
+               
+            }
+
+            return result;             
         }
     }
 }

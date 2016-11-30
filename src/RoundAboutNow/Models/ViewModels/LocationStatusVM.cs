@@ -9,7 +9,8 @@ namespace RoundAboutNow.Models.ViewModels
     public class LocationStatusVM
     {
         public string Header { get; set; }
-        public string WarningMessage { get; set; }
+        public string DisturbanceWarningMessage { get; set; }
+        public string WeatherWarningMessage { get; set; }
         public int WarningLevel { get; set; }
         public List<Station> Stations { get; set; }
     }

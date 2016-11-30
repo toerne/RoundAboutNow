@@ -11,7 +11,7 @@ namespace RoundAboutNow.Api.Models
     public static class StatusMessageCreator
     {
         private static WarningInformation warningInformation;
-        
+
 
 
         public static async Task<StatusMessage> GetGeneralStatusMessageAsync(string latitude, string longitude)
@@ -21,7 +21,7 @@ namespace RoundAboutNow.Api.Models
 
 
             //TODO: Hämta location från separat API
-            statusMessage.WarningMessage = "";
+            statusMessage.DisturbanceWarningMessage = "";
             warningInformation = await AddWeatherWarningStatusMessageAsync(latitude, longitude, warningInformation);
             warningInformation = await AddDisturbanceStatusMessageAsync(latitude, longitude, warningInformation);
 
@@ -60,31 +60,44 @@ namespace RoundAboutNow.Api.Models
             var stations = await stationsCloseBy.GetSLStations();
 
             List<Task> taskList = new List<Task>();
-
-            foreach (var station in stations)
+            try
             {
-                try
+                if (stations.Count > 1)
                 {
-                    var newtask = new Task(() =>
-                    {
-                        var disturbancesApi = new SLDisturbancesApi(KeyKeeper.GetSLDisturbanceKey());
-                        disturbancesApi.SiteID = station.Id.ToString().Substring(station.Id.ToString().Length - 4, 4);
-                        var disturbancesTask = disturbancesApi.GetSLDisturbances();
-                        station.Disturbances = disturbancesTask.Result;
-                    });
 
-                    newtask.Start();
-                    taskList.Add(newtask);
+
+                    foreach (var station in stations)
+                    {
+
+                        var newtask = new Task(() =>
+                        {
+                            var disturbancesApi = new SLDisturbancesApi(KeyKeeper.GetSLDisturbanceKey());
+                            disturbancesApi.SiteID = station.Id.ToString().Substring(station.Id.ToString().Length - 4, 4);
+                            var disturbancesTask = disturbancesApi.GetSLDisturbances();
+                            station.Disturbances = disturbancesTask.Result;
+                        });
+
+                        newtask.Start();
+                        taskList.Add(newtask);
+                    }
                 }
-                catch (Exception ex)
+                else if (stations.Count == 1)
                 {
-                    throw ex;
+                    var station = stations.First();
+                    var disturbancesApi = new SLDisturbancesApi(KeyKeeper.GetSLDisturbanceKey());
+                    disturbancesApi.SiteID = station.Id.ToString().Substring(station.Id.ToString().Length - 4, 4);
+                    station.Disturbances = await disturbancesApi.GetSLDisturbances();
                 }
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
             }
 
             Task.WaitAll(taskList.ToArray());
 
-            
+
             warningInfo.SLStations = stations;
 
             return warningInfo;
