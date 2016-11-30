@@ -10,7 +10,8 @@ namespace RoundAboutNow.Api.Models.Api.SL
 {
     public class WarningInformation
     {
-        private string warningMessage = "";
+        private string disturbanceWarningMessage = "";
+        private string weatherWarningMessage = "";
         private int warningLevel = 1;
         public List<SLStation> SLStations { get; set; } = new List<SLStation>();
         public SMHIWarning SmhiWarning { get; set; }
@@ -30,7 +31,7 @@ namespace RoundAboutNow.Api.Models.Api.SL
             {
                 warningLevel = 3;
             }
-            warningMessage += $"{SLStations.Where(s => s.Disturbances.Count > 0).Count()} av {SLStations.Count} ({Math.Round(percentage * 100, 0)}%) hållplatser rapporterar störningar";
+            disturbanceWarningMessage += $"{SLStations.Where(s => s.Disturbances.Count > 0).Count()} av {SLStations.Count} ({Math.Round(percentage * 100, 0)}%) hållplatser rapporterar störningar";
 
 
             if (warningLevel < SmhiWarning.WarningClass)
@@ -39,7 +40,7 @@ namespace RoundAboutNow.Api.Models.Api.SL
             }
 
             if (SmhiWarning.WarningClass > 0)
-                warningMessage += $"\nVäder: {SmhiWarning.WeatherWarningMessage}";
+                weatherWarningMessage += $"\nVäder: {SmhiWarning.WeatherWarningMessage}";
 
 
         }
@@ -48,7 +49,8 @@ namespace RoundAboutNow.Api.Models.Api.SL
         {
             CreateWarning();
             message.WarningLevel = warningLevel;
-            message.WarningMessage += warningMessage;
+            message.DisturbanceWarningMessage = disturbanceWarningMessage;
+            message.WeatherWarningMessage = weatherWarningMessage;
             foreach (var station in SLStations)
             {
                 var newStation = new Station

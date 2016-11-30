@@ -25,10 +25,19 @@ namespace RoundAboutNow.Api.Controllers
         [HttpGet("{latitude},{longitude}")]
         public async Task<StatusMessage> Get(string latitude, string longitude)
         {
-            //TODO: metodanrop för get status logik
-            var message = await StatusMessageCreator.GetGeneralStatusMessageAsync(latitude, longitude);
+            try
+            {
+                var message = await StatusMessageCreator.GetGeneralStatusMessageAsync(latitude, longitude);
+                return message;
+            }
+            catch (Exception ex)
+            {
 
-            return message;
+                throw ex;
+            }
+            //TODO: metodanrop för get status logik
+
+
         }
     }
 }
