@@ -58,8 +58,6 @@ div.carousel-box {
     width: 80%;
 }
 
-
-
 .verticalscroll::-webkit-scrollbar-track {
     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
     background-color: #F5F5F5;
@@ -89,14 +87,15 @@ div.carousel-box {
     margin: 0px 10px 0px 10px;
 }
 
-.carousel-text-problems p, .carousel-text-no-problems p{
-    margin-bottom: 2px;
-}
+    .carousel-text-problems p, .carousel-text-no-problems p {
+        margin-bottom: 2px;
+    }
 
-.carousel-text-problems{
+.carousel-text-problems {
     border-left: solid 10px #ff8c00;
 }
-.carousel-text-no-problems{
+
+.carousel-text-no-problems {
     border-left: solid 10px #007f0e;
 }
 
