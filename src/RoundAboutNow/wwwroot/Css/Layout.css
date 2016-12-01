@@ -1,5 +1,4 @@
 ﻿.navbar-brand {
-
     position: absolute;
     width: 100%;
     left: 0;
@@ -19,6 +18,8 @@
 nav.navbar.navbar-default {
     box-shadow: 0 5px 12px -2px gray;
     border-radius: 0px;
+    background-color: #ffffff;
+    border: none;
 }
 
 .navbar-right {
@@ -50,14 +51,34 @@ body {
     height: 42px;
     padding: 10px;
     color: #777;
-    border: 1px solid #e7e7e7;
-    background-color: #f8f8f8;
+    border: none;
+    background-color: #FFFFFF;
     box-shadow: 0 9px 9px 12px gray;
 }
 
 hr {
-    border-bottom: gray 1px solid;
+    border-bottom: #9A22C9 1px solid;
     max-width: 1120px;
     margin-top: 10px;
     margin-bottom: 10px;
+}
+
+div#exCollapsingNavbar {
+    max-width: 1120px;
+    padding: 0px;
+}
+
+.fa-spinner {
+    color: #9A22C9;
+}
+
+.page-section {
+    max-width: 1120px;
+    box-shadow: 0 5px 12px 3px gray;
+    background-color: #FFFFFF;
+    padding: 5px;
+}
+
+body {
+    background-color: #bdb7bf;
 }

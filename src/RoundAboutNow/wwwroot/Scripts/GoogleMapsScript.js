@@ -282,7 +282,7 @@ function showGoogleMap(position) {
                         }
                     }
                     if (breakloop) {
-                        $("#areaTitle").text("Status för " + areaName.split(",")[0]);
+                        $("#areaTitle").text("Lokaltrafikinformation för " + areaName.split(",")[0]);
                         break;
                     }
                 }
