@@ -55,7 +55,7 @@ namespace RoundAboutNow.Api.Models.Api.SL
             var handler = new WebServiceHandler();
             string json = await handler.GetResultFromAPIAsync(url);            
 
-            List<SLStation> result = new List<SLStation>();
+            List<SLStation> slStations = new List<SLStation>();
 
             try
             {
@@ -71,7 +71,7 @@ namespace RoundAboutNow.Api.Models.Api.SL
 
                 if (deserializedResult.LocationList.StopLocation != null)
                 {
-                    result = deserializedResult.LocationList.StopLocation;
+                    slStations = deserializedResult.LocationList.StopLocation;
                 }
                 else
                 {
@@ -86,13 +86,19 @@ namespace RoundAboutNow.Api.Models.Api.SL
                     var deserializedSingleStationResult = JsonConvert.DeserializeAnonymousType(json, wrapperSingleStation);
                     
                     if(deserializedSingleStationResult.LocationList.StopLocation != null)
-                        result.Add(deserializedSingleStationResult.LocationList.StopLocation);
+                        slStations.Add(deserializedSingleStationResult.LocationList.StopLocation);
                 }
             }
             catch (Exception)
             {
                
             }
+
+
+            var result = slStations
+                .GroupBy(x => x.Id.ToString().Substring(x.Id.ToString().Length - 4, 4))
+                .Select(g => g.First())
+                .ToList();
 
             return result;             
         }

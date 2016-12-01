@@ -33,14 +33,14 @@
 
 #text-carousel {
     max-width: 1100px;
-    height: 250px;
+    height: 300px;
     
 }
 
 
 .carousel-content {
     overflow: auto;
-    height: 400px;
+    height: 300px;
 }
 
 .carousel-control {
@@ -60,31 +60,34 @@ div.carousel-box {
 
 .verticalscroll::-webkit-scrollbar-track {
     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-    background-color: #F5F5F5;
+    background-color: #bdb7bf;
 }
 
 .verticalscroll::-webkit-scrollbar {
     width: 6px;
-    background-color: #F5F5F5;
+    background-color: #9d02ff;
 }
 
 .verticalscroll::-webkit-scrollbar-thumb {
-    background-color: #000000;
+    background-color: #9d02ff;
 }
 
 
 .carousel-control {
     border-radius: 16px;
     color: #9d02ff;
+    opacity: 1;
+    text-shadow:none;
 }
 
 .carousel-text-problems, .carousel-text-no-problems {
     text-align: left;
-    padding: 5px;
+    padding: 15px;
     border-top: solid 1px;
     border-bottom: solid 1px;
     border-right: solid 1px;
     margin: 0px 10px 0px 10px;
+    font-size: 17px;
 }
 
     .carousel-text-problems p, .carousel-text-no-problems p {
@@ -109,25 +112,6 @@ div#locationstatus i {
     color: #8452a5;
 }
 
-/*.carousel-text-problems {
-    text-align: left;
-    background: rgba(255, 247, 0, 0.35);
-    border: 1px solid #723f01;
-    padding: 5px 10px 0px 10px;
-    margin: 0px 20px 0px 20px;
-    color: black;
-    border-radius: 10px;
-    box-shadow: 0 3px 10px 1px gray;
+#warning-message-text{
+    font-size: 17px;
 }
-
-.carousel-text-no-problems {
-    text-align: center;
-    max-width: 300px;
-    background: rgba(0, 161, 5, 0.49);
-    border: 1px solid #723f01;
-    padding: 10px 10px 0px 10px;
-    margin: 0px 20px 0px 20px;
-    color: black;
-    border-radius: 10px;
-    box-shadow: 0 3px 10px 1px gray;
-}*/

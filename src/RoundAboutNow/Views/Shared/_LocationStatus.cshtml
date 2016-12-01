@@ -16,7 +16,7 @@
             <i class="fa fa-smile-o fa-5x inactive-smiley" aria-hidden="true"></i><i class="fa fa-meh-o fa-5x inactive-smiley" aria-hidden="true"></i><i class="fa fa-frown-o fa-5x" id="MuchProblemIcon" aria-hidden="true"></i>
             break;
     }
-    <div>
+    <div id="warning-message-text">
         <p>@Model.DisturbanceWarningMessage</p>
         <p>@Model.WeatherWarningMessage</p>
     </div>
@@ -34,7 +34,7 @@
                     {
                         isFirstSlide = "active";
                     }
-                    <div class="item @isFirstSlide">
+                    <div class="station-number-@Model.Stations.IndexOf(station) item @isFirstSlide">
                         <div class="carousel-content verticalscroll">
                             <center><h3><b>@station.Name</b></h3></center>
                             <br />
@@ -62,10 +62,10 @@
         </div>
     </div>
     <a class="left carousel-control" href="#text-carousel" data-slide="prev">
-            <span class="glyphicon glyphicon-chevron-left"></span>
+        <span class="glyphicon glyphicon-chevron-left"></span>
     </a>
     <a class="right carousel-control" href="#text-carousel" data-slide="next">
-            <span class="glyphicon glyphicon-chevron-right"></span>
+        <span class="glyphicon glyphicon-chevron-right"></span>
     </a>
 </div>
 
@@ -74,6 +74,28 @@
     $('.carousel').carousel({
         interval: false
     });
+
+
+    var currentMarker;
+
+    $("#text-carousel").on('slide.bs.carousel', function (e) {
+
+        toggleBounce();
+        var id = $(e.relatedTarget).attr('class').split(' ')[0];
+        currentMarker = stationMarkers[id];
+        toggleBounce();
+    });
+
+    function toggleBounce() {
+
+        if (currentMarker.getAnimation() !== null) {
+            currentMarker.setAnimation(null);
+        } else {
+            currentMarker.setAnimation(google.maps.Animation.BOUNCE);
+        }
+    }
+
+    var stationMarkers = {};
 </script>
 
 @foreach (var station in Model.Stations)
@@ -101,13 +123,19 @@
         };
 
 
-        var marker = new google.maps.Marker({
+
+        stationMarkers['station-number-' + @Model.Stations.IndexOf(station)] = new google.maps.Marker({
             position: markerpos,
             map: map,
             //fixa encoding åäöüæ
-            title: "@station.Name",
+            title: "@Html.Raw(station.Name)",
             animation: google.maps.Animation.DROP,
             icon: image
         });
+
+            currentMarker = stationMarkers['station-number-0'];
+            toggleBounce();
+
+
     </script>
 }

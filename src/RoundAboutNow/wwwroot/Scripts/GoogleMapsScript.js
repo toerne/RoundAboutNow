@@ -300,6 +300,5 @@ function addreziselistner() {
         google.maps.event.trigger(map, "resize");
         map.setCenter(center);
     });
-
 };
 

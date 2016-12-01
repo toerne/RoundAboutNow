@@ -69,7 +69,7 @@ namespace RoundAboutNow.Api.Models.Api.SMHI
 
             var smhiWarning = new SMHIWarning();
             //TEST PURPOSE USING MOCK TEST DATA
-            if (true)
+            if (false)
             {
                 #region testJsonstring
 
