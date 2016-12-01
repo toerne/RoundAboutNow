@@ -64,7 +64,7 @@ hr {
 }
 
 div#exCollapsingNavbar {
-    max-width: 1120px;
+    max-width: 1150px;
     padding: 0px;
 }
 
@@ -81,4 +81,9 @@ div#exCollapsingNavbar {
 
 body {
     background-color: #bdb7bf;
+}
+
+
+h1, h2, h3, p, a {
+    color: #777;
 }

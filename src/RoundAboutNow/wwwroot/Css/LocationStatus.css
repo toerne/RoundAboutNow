@@ -28,13 +28,13 @@
     }
 
 .inactive-smiley {
-    color: rgba(63, 0, 255, 0.15);
+    color: rgba(63, 0, 255, 0.05);
 }
 
 #text-carousel {
     max-width: 1100px;
-    height: 400px;
-    margin-bottom: 80px;
+    height: 250px;
+    
 }
 
 
@@ -76,8 +76,8 @@ div.carousel-box {
 
 
 .carousel-control {
-    border: gray 3px outset;
     border-radius: 16px;
+    color: #9d02ff;
 }
 
 .carousel-text-problems, .carousel-text-no-problems {
@@ -104,6 +104,10 @@ div#locationstatus i {
     margin-right: 5px;
     margin-left: 5px;
     margin-bottom: 10px;
+}
+
+.carousel-control:focus, .carousel-control:hover {
+    color: #8452a5;
 }
 
 /*.carousel-text-problems {

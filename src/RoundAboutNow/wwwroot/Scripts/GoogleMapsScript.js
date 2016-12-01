@@ -248,10 +248,10 @@ function showGoogleMap(position) {
     });
 
     new google.maps.Circle({
-        strokeColor: '#14e9fc',
+        strokeColor: '#bdb7bf',
         strokeOpacity: 0.8,
         strokeWeight: 2,
-        fillColor: '#14e9fc',
+        fillColor: '#bdb7bf',
         fillOpacity: 0.20,
         map: map,
         center: uluru,
