@@ -78,33 +78,40 @@
 
     var currentMarker;
 
+
     $("#text-carousel").on('slide.bs.carousel', function (e) {
-
-        toggleBounce();
-        var id = $(e.relatedTarget).attr('class').split(' ')[0];
-        currentMarker = stationMarkers[id];
-        toggleBounce();
-    });
-
-    function toggleBounce() {
 
         if (currentMarker.getAnimation() !== null) {
             currentMarker.setAnimation(null);
-        } else {
+        }
+        var id = $(e.relatedTarget).attr('class').split(' ')[0];
+        currentMarker = stationMarkers[id];
+        Bounce();
+    });
+
+    function Bounce() {
+
+        if (currentMarker.getAnimation() !== null) {
+            currentMarker.setAnimation(null);
+        }
+        else {
             currentMarker.setAnimation(google.maps.Animation.BOUNCE);
         }
+
     }
 
     var stationMarkers = {};
 </script>
 
-@foreach (var station in Model.Stations)
-{
-    <script>
-        var markerpos = { lat: @station.Latitude, lng: @station.Longitude }
+@{
 
-        var imageUrl;
-        @if (station.StatusLevel == 0)
+    foreach (var station in Model.Stations)
+    {
+        <script>
+            var markerpos = { lat: @station.Latitude, lng: @station.Longitude }
+
+            var imageUrl;
+            @if (station.StatusLevel == 0)
         {
             <text>imageUrl = "/images/stationok.png";</text>
         }
@@ -113,26 +120,36 @@
             <text>imageUrl = "/images/stationwarning.png";</text>
         }
 
-        var image = {
-            url: imageUrl,
-            size: new google.maps.Size(32, 32),
-            origin: new google.maps.Point(0, 0),
-            anchor: new google.maps.Point(16, 32)
-        };
+            var image = {
+                url: imageUrl,
+                size: new google.maps.Size(32, 32),
+                origin: new google.maps.Point(0, 0),
+                anchor: new google.maps.Point(16, 32)
+            };
 
 
 
-        stationMarkers['station-number-' + @Model.Stations.IndexOf(station)] = new google.maps.Marker({
-            position: markerpos,
-            map: map,
-            title: "@Html.Raw(station.Name)",
-            animation: google.maps.Animation.DROP,
-            icon: image
-        });
+            stationMarkers['station-number-' + @Model.Stations.IndexOf(station)] = new google.maps.Marker({
+                position: markerpos,
+                map: map,
+                title: "@Html.Raw(station.Name)",
+                animation: google.maps.Animation.DROP,
+                icon: image
+            });
+
+
+
+
 
             currentMarker = stationMarkers['station-number-0'];
-            toggleBounce();
 
 
+        </script>
+    }
+
+    <script>
+        setTimeout(function(){
+            Bounce();
+        }, 1000);        
     </script>
 }
