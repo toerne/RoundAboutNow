@@ -230,7 +230,7 @@ function showGoogleMap(position) {
         ],
         {name: 'Styled Map'});
 
-    var imageUrl = "http://localhost:22416/images/youarehere.png";
+    var imageUrl = "/images/youarehere.png";
 
     var image = {
         url: imageUrl,

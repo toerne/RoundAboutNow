@@ -106,13 +106,11 @@
         var imageUrl;
         @if (station.StatusLevel == 0)
         {
-            //fixa bildlänkarna (relativa sökvägar)
-            <text>imageUrl = "http://localhost:22416/images/stationok.png";</text>
+            <text>imageUrl = "/images/stationok.png";</text>
         }
         else
         {
-            //fixa bildlänkarna(relativa sökvägar)
-            <text>imageUrl = "http://localhost:22416/images/stationwarning.png";</text>
+            <text>imageUrl = "/images/stationwarning.png";</text>
         }
 
         var image = {
@@ -127,7 +125,6 @@
         stationMarkers['station-number-' + @Model.Stations.IndexOf(station)] = new google.maps.Marker({
             position: markerpos,
             map: map,
-            //fixa encoding åäöüæ
             title: "@Html.Raw(station.Name)",
             animation: google.maps.Animation.DROP,
             icon: image
